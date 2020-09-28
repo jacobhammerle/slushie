@@ -1,13 +1,11 @@
-import * as React from 'react'
-import { Text, View } from 'react-native'
-import { NavigationContainer } from '@react-navigation/native'
+import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Ionicons from 'react-native-vector-icons/Ionicons'
-import { History, Settings } from '../components'
+import { History, Settings } from '../screens'
 
 const Tab = createBottomTabNavigator()
 
-const Home = () => {
+export default function HomeStack() {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -33,5 +31,3 @@ const Home = () => {
     </Tab.Navigator>
   )
 }
-
-export default Home

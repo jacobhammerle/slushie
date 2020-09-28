@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import Ionicons from 'react-native-vector-icons/Ionicons'
-import Env from '../config'
+import Env from '../../config'
 import { ActivityIndicator, FlatList, Text, View } from 'react-native';
 
 class History extends Component {
@@ -30,7 +30,7 @@ class History extends Component {
     const { transactions, isLoading } = this.state
 
     return (
-        <HomeContainer>
+        <HistoryContainer>
           {isLoading ? <ActivityIndicator/> : (
             <FlatList
               data={transactions}
@@ -43,12 +43,12 @@ class History extends Component {
           <AddButton>
             <Icon name='ios-add' />
           </AddButton>
-        </HomeContainer>
+        </HistoryContainer>
     )
   }
 }
 
-const HomeContainer = styled(View)`
+const HistoryContainer = styled(View)`
   flex: 1
   justify-content: center
   align-items: center
