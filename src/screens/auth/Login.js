@@ -1,27 +1,51 @@
-import React from "react"
+import React, { Component } from 'react'
 import styled from 'styled-components'
-import { Button, View, Text } from "react-native"
+import { Button, View, Text, TextInput } from "react-native"
 
-const Login = ({ navigation }) => {
-  return (
-    <LoginContainer>
-      <Text>Login</Text>
-      <Button
-        title="Go to Home"
-        onPress={() => navigation.navigate('Home')}
-      />
-      <Button
-        title="Don't have an account? Signup!"
-        onPress={() => navigation.navigate('Signup')}
-      />
-    </LoginContainer>
-  )
+class Login extends Component {
+  state = { email: '', password: '', errorMessage: null }
+
+  handleLogin = () => {
+    console.log('handleLogin')
+  }
+
+  render() {
+    return (
+      <LoginContainer>
+        <LoginInput
+          autoCapitalize="none"
+          placeholder="Email"
+          onChangeText={email => this.setState({ email })}
+          value={this.state.email}
+        />
+        <LoginInput
+          autoCapitalize="none"
+          placeholder="Password"
+          onChangeText={password => this.setState({ password })}
+          value={this.state.password}
+        />
+        <Button title="Login" onPress={this.handleLogin} />
+        <Button
+          title="Don't have an account? Signup!"
+          onPress={() => this.props.navigation.navigate('Signup')}
+        />
+      </LoginContainer>
+    )
+  }
 }
 
 const LoginContainer = styled(View)`
   flex: 1
   justify-content: center
   align-items: center
+`
+const LoginInput = styled(TextInput)`
+  border-color: gray
+  border-width: 1px
+  border-radius: 12px
+  padding: 16px
+  width: 85%
+  margin-bottom: 16px
 `
 
 export default Login
