@@ -4,7 +4,11 @@ import styled from 'styled-components'
 import { Button, View, Text, TextInput } from "react-native"
 
 class Login extends Component {
-  state = { email: '', password: '', errorMessage: null }
+  state = {
+    email: '',
+    password: '',
+    errorMessage: null
+  }
 
   handleLogin = () => {
     const { email, password } = this.state

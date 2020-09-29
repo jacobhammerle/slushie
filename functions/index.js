@@ -11,7 +11,7 @@ exports.createUser = functions.https.onRequest(async (request, response) => {
 })
 
 exports.getUserTransactions = functions.https.onRequest(async (request, response) => {
-    const transactions = await getUserTransactions()
+    const transactions = await getUserTransactions(request.query.id)
     cors(request, response, () => {
         response.send({ transactions: transactions })
     })

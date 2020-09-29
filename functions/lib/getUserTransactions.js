@@ -1,9 +1,9 @@
 const prisma = require('../prismaClient')
 
-const getUserTransactions = async () => {
+const getUserTransactions = async (userId) => {
     try {
         const userTransactions = await prisma.transaction.findMany({
-            where: { user_id: 1 },
+            where: { user_id: userId },
             select: {
                 id: true,
                 price: true,

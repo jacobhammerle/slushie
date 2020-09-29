@@ -5,7 +5,8 @@ import HomeStack from './HomeStack'
 
 class AppStack extends Component {
   render() {
-    if(this.props.user) { return ( <HomeStack /> ) }
+    const { user } = this.props
+    if(user) { return ( <HomeStack /> ) }
     return ( <AuthStack /> )
   }
 }

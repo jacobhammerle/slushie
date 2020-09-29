@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
+import { firebase } from '../../firebase/config'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import ENV from '../../config'
 import { ActivityIndicator, FlatList, Text, View } from 'react-native';
@@ -9,13 +10,17 @@ class History extends Component {
     super(props)
 
     this.state = {
+      currentUser: null,
       transactions: [],
       isLoading: true
     }
   }
 
   componentDidMount() {
-    fetch(`${ENV.BASE_URL}/getUserTransactions`)
+    const { currentUser } = firebase.auth()
+    this.setState({ currentUser })
+
+    fetch(`${ENV.BASE_URL}/getUserTransactions?id=${currentUser.uid}`)
       .then((response) => response.json())
       .then((json) => {
         this.setState({ transactions: json.transactions })

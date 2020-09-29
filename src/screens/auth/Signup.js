@@ -7,7 +7,14 @@ import { Button, View, Text, TextInput } from "react-native"
 
 class Signup extends Component {
 
-  state = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '', errorMessage: null }
+  state = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+    errorMessage: null
+  }
 
   handleSignup = () => {
     const { firstName, lastName, email, password, confirmPassword } = this.state
