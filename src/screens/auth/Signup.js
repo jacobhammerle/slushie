@@ -1,13 +1,16 @@
 import React, { Component } from 'react'
 import { firebase } from '../../firebase/config'
+import axios from 'axios'
 import styled from 'styled-components'
+import ENV from '../../config'
 import { Button, View, Text, TextInput } from "react-native"
 
 class Signup extends Component {
-  state = { fullName: '', email: '', password: '', confirmPassword: '', errorMessage: null }
+
+  state = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '', errorMessage: null }
 
   handleSignup = () => {
-    const { fullName, email, password, confirmPassword } = this.state
+    const { firstName, lastName, email, password, confirmPassword } = this.state
     if (password !== confirmPassword) {
       alert("Passwords don't match")
       return
@@ -21,19 +24,20 @@ class Signup extends Component {
           const data = {
               id: uid,
               email,
-              fullName,
+              firstName,
+              lastName
           }
-          const usersRef = firebase.firestore().collection('users')
-          usersRef
-            .doc(uid)
-            .set(data)
-            .then(() => {
-              // navigate to HomeStack
-              // this.props.navigation.navigate('Home')
-              console.log('user created successfully')
+          axios
+            .post(
+                `${ENV.BASE_URL}/createUser`,
+                { user: data }
+            )
+            .then((response) => {
+              // navigate to HomeStack and pass along newly created user data
+              console.log(response.data)
             })
             .catch((error) => {
-              alert(error)
+                console.log(error)
             })
         })
         .catch((error) => {
@@ -46,9 +50,15 @@ class Signup extends Component {
       <SignupContainer>
         <SignupInput
           autoCapitalize="none"
-          placeholder="Full Name"
-          onChangeText={fullName => this.setState({ fullName })}
-          value={this.state.fullName}
+          placeholder="First Name"
+          onChangeText={firstName => this.setState({ firstName })}
+          value={this.state.firstName}
+        />
+        <SignupInput
+          autoCapitalize="none"
+          placeholder="Last Name"
+          onChangeText={lastName => this.setState({ lastName })}
+          value={this.state.lastName}
         />
         <SignupInput
           autoCapitalize="none"

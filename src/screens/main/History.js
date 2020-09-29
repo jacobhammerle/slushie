@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import Ionicons from 'react-native-vector-icons/Ionicons'
-import Env from '../../config'
+import ENV from '../../config'
 import { ActivityIndicator, FlatList, Text, View } from 'react-native';
 
 class History extends Component {
@@ -15,7 +15,7 @@ class History extends Component {
   }
 
   componentDidMount() {
-    fetch(`${Env.BASE_URL}/getUserTransactions`)
+    fetch(`${ENV.BASE_URL}/getUserTransactions`)
       .then((response) => response.json())
       .then((json) => {
         this.setState({ transactions: json.transactions })
