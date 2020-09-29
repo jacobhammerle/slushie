@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { firebase } from '../../firebase/config'
 import styled from 'styled-components'
 import { Button, View, Text, TextInput } from "react-native"
 
@@ -6,7 +7,12 @@ class Login extends Component {
   state = { email: '', password: '', errorMessage: null }
 
   handleLogin = () => {
-    console.log('handleLogin')
+    const { email, password } = this.state
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then((response) => console.log(response))
+      .catch(error => console.log(error))
   }
 
   render() {
