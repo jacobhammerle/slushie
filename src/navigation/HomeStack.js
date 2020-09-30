@@ -8,7 +8,7 @@ const Tab = createBottomTabNavigator()
 class HomeStack extends Component {
   render(){
     return (
-      <Tab.Navigator
+      <Tab.Navigator mode="modal"
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, color, size }) => {
             let iconName;
